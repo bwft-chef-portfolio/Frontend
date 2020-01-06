@@ -66,7 +66,7 @@ export const getData = () => dispatch => {
     console.log()
     dispatch({ type: FETCH_DATA_START });
     axiosWithAuth()
-      .get(`/posts/all`)
+      .get(`/recipes`)
       .then(res => {
         console.log(res)
         dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
@@ -86,7 +86,7 @@ export const addRecipe = (addRecipe) => dispatch => {
 console.log('add recipe', addRecipe)
 dispatch({ type: ADD_RECIPE_START })
 axiosWithAuth()
-    .post('/posts', addRecipe)
+    .post('/recipes', addRecipe)
     .then(res => {
     console.log('res', res)
     dispatch({ type: ADD_RECIPE_SUCCESS, payload: res.data })
@@ -106,7 +106,7 @@ export const DELETE_RECIPE_FAILURE = "DELETE_RECIPE_FAILURE";
 export const deleteRecipe = (id) => dispatch => {
   dispatch({ type: DELETE_RECIPE_START })
   axiosWithAuth()
-    .delete(`posts/${id}`)
+    .delete(`/recipes/${id}`)
     .then(res => {
       console.log(res)
       dispatch({ type: DELETE_RECIPE_SUCCESS, payload: res.data })
@@ -125,7 +125,7 @@ export const EDIT_RECIPE_FAILURE = 'EDIT_RECIPE_FAILURE';
 export const editRecipe = (id, editedRecipe) => dispatch => {
     dispatch({ type: EDIT_RECIPE_START })
     axiosWithAuth()
-      .put(`/posts/${id}`, editedRecipe)
+      .put(`/recipes/${id}`, editedRecipe)
       .then(res => {
         console.log(res)
         dispatch({ type: EDIT_RECIPE_SUCCESS, payload: res.data })
@@ -141,11 +141,11 @@ export const GETCARD_FETCH = "GETCARD_FETCH";
 export const GETCARD_SUCCESS = "GETCARD_SUCCESS";
 export const GETCARD_FAILURE = "GETCARD_FAILURE";
 
-const URL = '#/api';
+const URL = 'https://backendchefls.herokuapp.com/api';
 export const getCard = () => (dispatch) => {
     dispatch({ type: GETCARD_FETCH })
     axios
-      .get(`${URL}/posts/all`)
+      .get(`${URL}/recipes`)
       .then(res => {
         dispatch({ type: GETCARD_SUCCESS, payload: res.data });
       })
