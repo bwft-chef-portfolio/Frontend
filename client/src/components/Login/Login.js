@@ -29,7 +29,8 @@ const Login = (props) => {
         //props.addTeamMember(person);
         console.log(`The username is: ${user.username} and password is: ${user.password}`)
         //This may need to not be reset for final
-        setUser({name:"", email:"", role:"Unknown"})
+        setUser({username:'', password:'', role:'user'})
+        console.log(`The username is: ${user.username} and password is: ${user.password}`)
     }
 
     return(
