@@ -20,7 +20,7 @@ font-family: 'Quicksand', sans-serif;
   text-transform: uppercase;
   color:black;
   }
-`;
+`
 
 const Label = styled.label`
 font-size: 20px;
