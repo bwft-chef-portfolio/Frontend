@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-
+import recipeCard from './recipeCard';
+import RecipeCard from './recipeCard';
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -14,13 +15,13 @@ const CreateNewRecipe = (props) => {
 
     const [recipe, setRecipe] = useState(
         {
-        user_id:"", //Will be determined by props
+        user_id:props, //Will be determined by props
         type: "",
         img_url:"",//We will need to do this tomorrow
         title:"",
         description:"",
         ingredients:"",
-        instrucitons:""
+        instructions:""
         }
     )
 
@@ -35,10 +36,10 @@ const CreateNewRecipe = (props) => {
     
     const submitForm = el => {
         el.preventDefault();
-        //user action preformed here
-        //props.addTeamMember(person);
+        
         console.log("I will put my axios call here")
         //This may need to not be reset for final
+        //It will require that axios send user id to server with info
         setRecipe({user_id:"", //Will be determined by props
         type: "",
         img_url:"",//We will need to do this tomorrow
@@ -50,6 +51,7 @@ const CreateNewRecipe = (props) => {
     }
 
     return(
+        <>
         <form onSubmit={submitForm}>
             <label htmlFor='type'>Type:</label>
             <select
@@ -113,6 +115,8 @@ const CreateNewRecipe = (props) => {
             <button type="submit">Submit</button>
 
         </form>
+        {RecipeCard(recipe)}
+        </>
     )
 }
 
