@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {login} from '../../actions/index';
 
 
 /* 
@@ -6,65 +9,77 @@ import React, {useState} from 'react';
     and submits.
 */
 
-const Login = (props) => {
+class Login extends React.Component {
     //States
-    const [user, setUser] =useState({
-        username:'',
-        password:'',
-        role: 'user'
-    })
+    state = {
+            username:'',
+            password:''
+        }
+    
 
-    const handleChanges = el => {
-        console.log([el.target.name])
-        console.log(el.target)
-        setUser({
-            ...user,
-            [el.target.name]:el.target.value
+
+        login = e => {
+            e.preventDefault();
+            this.props.login(this.state.username, this.state.password).then(res => {
+                if (res) {
+                    this.props.history.push('/protected');
+                }
+            });
+        };
+
+    textFormHandler = e => {
+        this.setState({
+            [e.target.name]: e.target.value
         })
     }
-
-    const submitForm = el => {
-        el.preventDefault();
-        //user action preformed here
-        //props.addTeamMember(person);
-        console.log(`The username is: ${user.username} and password is: ${user.password}`)
-        //This may need to not be reset for final
-        setUser({username:'', password:'', role:'user'})
-        console.log(`The username is: ${user.username} and password is: ${user.password}`)
-    }
-
+    render() {
     return(
-        <form onSubmit={submitForm}>
+        <form>
             <label htmlFor="username">Username:</label>
             <input
             type="text"
             id="username"
             name="username"
             placeholder="username"
-            onChange={handleChanges}
+            onChange={this.textFormHandler}
             required
             minLength="5"
             maxLength="15"
             size= "16"
-            value={user.username}
+            value={this.state.username}
             />
 
         <label htmlFor="password">Password:</label>
         <input
-        type="text"
+        type="password"
         id="password"
         name="password"
         placeholder="password"
-        onChange={handleChanges}
+        onChange={this.textFormHandler}
         required
         minLength="5"
         maxLength="20"
         size= "16"
-        value={user.password}
+        value={this.state.password}
         />
-        <button type="submit">Submit</button>
+        <button onClick={this.login} type="submit">Submit</button>
         </form>
     )
 
 }
-export default Login;
+}
+
+
+const mapStateToProps = state => {
+    return {
+        isLoadingLOGIN: state.isLoadingLOGIN,
+        successLOGIN: state.successLOGIN,
+        user: state.user
+    };
+};
+export default withRouter(
+    connect(
+        mapStateToProps,
+        {login}
+    )(Login)
+);
