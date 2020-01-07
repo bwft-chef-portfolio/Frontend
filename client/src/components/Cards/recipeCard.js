@@ -13,6 +13,7 @@
 
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import backUpImage from '../images/pizza.jpg';
 //will import styling library we will use
 
 const Card =styled.div`
@@ -38,12 +39,19 @@ const RecipeCard = (props) => {
         }
     )
     */
-   
-
+   //backup 
+        function imgError(img){
+            img.oneError = null;
+            img.src = backUpImage;
+            console.log('Triggered Error');
+            return true;
+        }
+//<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
     return(
         <Card>
             <h2>{props.title}</h2>
-            {/* I will need to put image here */}
+            <img src= {backUpImage} />
+            {/*<img src={props.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
             <p>{props.type}</p>
             <p>{props.description}</p>
             <p>{props.ingredients}</p>

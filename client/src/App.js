@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/withAuth/authRouter';
-
+import Troubleshoot from './components/Troubleshoot'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Route path='/' component={NavBar} />
       <Route exact path='/registration' component={Registration} />
       <Route path='/login' component={Login} />
-      
+      <Troubleshoot/>
     </div>
   );
 }
