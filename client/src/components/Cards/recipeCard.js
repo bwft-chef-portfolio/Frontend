@@ -19,6 +19,7 @@ const Card =styled.div`
     display:flex;
     flex-direction:column;
     padding:1%;
+    border: 1% solid gray;
     color: red;
 `
 
