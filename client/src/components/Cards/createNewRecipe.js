@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import recipeCard from './recipeCard';
 import RecipeCard from './recipeCard';
 //I still need to add input validation and axios call
 
