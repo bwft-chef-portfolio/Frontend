@@ -6,6 +6,14 @@ import {connect} from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { addUser } from '../../actions';
 
+const LoginWrapper = styled.div `
+display: flex;
+width: 30%;
+height: 50%;
+margin: 0 auto;
+justify-content: center;
+`
+
 const Input = styled.input`
 font-family: 'Quicksand', sans-serif;
   font-size: 12px;
@@ -17,7 +25,7 @@ font-family: 'Quicksand', sans-serif;
   align-content: center;
   background-color: white;
   border: black 1px solid;
-  width: 90%;
+  width: 15rem;
   margin: 8px;
   border-radius: 5px;
   color:black;
@@ -31,7 +39,7 @@ margin-top:-10px;
 
 const Button = styled.button`
 font-family: 'Lato', sans-serif;
-width:90%;
+width:12rem;
 height:12%;
   cursor: pointer;
   background: transparent;
@@ -43,6 +51,7 @@ height:12%;
   padding: 0.25em 1em;
   transition: 0.5s all ease-out;
   margin:30px;
+  align-content: center;
   &:hover {
     background-color: #1F1E1E;
     color: #07FE20;
@@ -81,6 +90,7 @@ class Registration extends React.Component {
 
     render() { 
         return ( 
+            <LoginWrapper>
             <div className="container">
                 <img src={ChefPort_Logo} alt='logo' />
                 
@@ -128,6 +138,7 @@ class Registration extends React.Component {
                 </form>
                 </div>
             </div>
+            </LoginWrapper>
          );
     }
 }
