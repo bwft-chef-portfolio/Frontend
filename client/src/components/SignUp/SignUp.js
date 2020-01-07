@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from "axios";
 import styled from "styled-components";
 import ChefPort_Logo from '../images/ChefPort_Logo.png'
+import {connect} from 'react-redux';
+import Loader from 'react-loader-spinner';
+import { addUser } from '../../actions';
 
 const Input = styled.input`
 font-family: 'Quicksand', sans-serif;
@@ -17,9 +20,7 @@ font-family: 'Quicksand', sans-serif;
   width: 90%;
   margin: 8px;
   border-radius: 5px;
-  text-transform: uppercase;
   color:black;
-  }
 `
 
 const Label = styled.label`
@@ -47,53 +48,97 @@ height:12%;
     color: #07FE20;
   }`
 
-const SignUp = () => {
-    const [user, setUser] = useState({
-        name: "",
-        username: "",
-        password: "",
-        email: "",
-        number: ""
-    })
-    const handleChange = e => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
-        })
-    }
-    const handleSubmit = e => {
-        e.preventDefault(
-            axios.post("https://reqres.in/api/users/", user)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                })
-        )
+class Registration extends React.Component {
+    state = {
+        userInfo: {
+            username: '',
+            password: '',
+            email: '',
+            location: '',
+            phone: ''
+        }
+    };
+    
+    componentDidMount() {
+        this.props.addUser()
     }
 
-    return (
-        <div className='container'>
-            <img src={ChefPort_Logo} alt='logo' />
-            <h2>Your Information</h2>
-            <form className='customForm' onSubmit={handleSubmit}>
+    handleChanges = e => {
+        this.setState({
+            userInfo: {
+                ...this.state.userInfo,
+                [e.target.name]: e.target.value
+            }
+        });
+    };
+
+    registration = e => {
+        e.preventDefault();
+        console.log(this.state.userInfo)
+        this.props.addUser(this.state.userInfo)
+        this.props.history.push('/login')
+    }
+
+    render() { 
+        return ( 
+            <div className="container">
+                <img src={ChefPort_Logo} alt='logo' />
                 
-                <Input placeholder="Full Name" type="text" name="name" value={user.name} onChange={handleChange} required />
-
-                <Input placeholder="User Name" type="text" name="username" value={user.username} onChange={handleChange} required />
-
-                <Input placeholder="Phone Number" type="text" name="number" value={user.number} onChange={handleChange} required />
-
-                <Input placeholder="Email" type="text" name="email" value={user.email} onChange={handleChange} required />
-
-                <Input placeholder="Create Password" type="password" name="password" value={user.password} onChange={handleChange} required />
-
-                <Button type="submit">Submit</Button>
-            </form>
-            <p>By signing up, you agree to our Terms and Privacy Policy</p>
-        </div>
-    )
+                <div className="register-form">
+                  <h1>Registration</h1>
+                <form className="form-1">
+                    <p>Username </p>
+                    <Input
+                        type="text"
+                        name="username"
+                        placeholder="username"
+                        value={this.state.userInfo.username}
+                        onChange={this.handleChanges}
+                    />
+                    <p>Password </p>
+                    <Input
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                        value={this.state.userInfo.password}
+                        onChange={this.handleChanges}
+                    />
+                  
+                
+                
+                    <p>Email </p>
+                    <Input
+                        type="email"
+                        name="email"
+                        placeholder="email"
+                        value={this.state.userInfo.email}
+                        onChange={this.handleChanges}
+                    />
+                    <p>Location </p>
+                    <Input
+                        type="text"
+                        name="location"
+                        placeholder="location"
+                        value={this.state.userInfo.location}
+                        onChange={this.handleChanges}
+                    />
+                    <Button onClick={this.registration}>
+                        Register
+                    </Button>
+                </form>
+                </div>
+            </div>
+         );
+    }
 }
 
-export default SignUp
+const mapStateToProps = state => ({
+    error: state.error,
+    addUser: state.addUser,
+    fetchingData: state.fetchingData
+});
+
+export default connect(
+    mapStateToProps,
+    {addUser}
+)(Registration); 

@@ -1,19 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
+import Registration from './components/SignUp/SignUp';
+import NavBar from './components/NavBar';
+import { Route } from 'react-router-dom';
 import './App.css';
-
-import SignUp from './components/SignUp/SignUp';
-
-import Troubleshoot from './components/Troubleshoot';
+import Login from './components/Login/Login';
+import PrivateRoute from './components/withAuth/authRouter';
 
 
 function App() {
   return (
     <div className="App">
-<SignUp />
-
-      <Troubleshoot/>
-
+      <Route path='/' component={NavBar} />
+      <Route exact path='/registration' component={Registration} />
+      <Route path='/login' component={Login} />
     </div>
   );
 }
