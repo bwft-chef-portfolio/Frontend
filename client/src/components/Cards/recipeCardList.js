@@ -9,7 +9,7 @@ function RecipeCardList(props) {
       {props.recipes.map(recipe => (
         <div key={recipe.id}>
             <h2>{recipe.title}</h2>
-
+            <img src={recipe.img_url}></img>
             <p>{recipe.type}</p>
             <p>{recipe.description}</p>
             <p>{recipe.ingredients}</p>

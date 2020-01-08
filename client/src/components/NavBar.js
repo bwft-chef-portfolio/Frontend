@@ -23,7 +23,7 @@ class NavBar extends React.Component {
                         {/* <a href='#'>ChefPort</a> */}
                     </div>
                     <div className='nav-links'>
-                        <Link to='/recipes'>Recipes</Link>
+                        <Link to='/recipes-list'>Recipes</Link>
                         <Link to='/login'>Login</Link>
                         <Link to='/registration'>Registration</Link>
                     </div>

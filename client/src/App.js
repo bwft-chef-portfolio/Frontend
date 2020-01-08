@@ -34,8 +34,8 @@ function App() {
             recipes={recipes}
           />
         )}
-
       />
+      <PrivateRoute path='/user-recipes-list'/>
       
     </div>
   );
