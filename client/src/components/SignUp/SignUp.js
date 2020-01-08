@@ -15,9 +15,10 @@ justify-content: center;
 width: 30%;
 height: 50%;
 margin: 0 auto;
-
+.img{
+    margin-top:1%;
+}
 `
-
 const Input = styled.input`
 font-family: 'Quicksand', sans-serif;
   font-size: 12px;
@@ -95,10 +96,7 @@ class Registration extends React.Component {
     render() { 
         return ( 
             <LoginWrapper>
-            <div className="container">
                 <img src={ChefPort_Logo} alt='logo' />
-                
-                <div className="register-form">
                   <h1>Registration</h1>
                 <form className="form-1">
                     <p>Username </p>
@@ -140,8 +138,6 @@ class Registration extends React.Component {
                         Register
                     </Button>
                 </form>
-                </div>
-            </div>
             </LoginWrapper>
          );
     }
