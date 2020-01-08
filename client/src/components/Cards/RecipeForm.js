@@ -3,6 +3,7 @@ import {TextField} from '@material-ui/core'
 import styled from "styled-components";
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addRecipe } from "../../actions/index";
 
 const Input = styled.input`
 font-family: 'Quicksand', sans-serif;
@@ -46,22 +47,25 @@ height:12%;
     color: #07FE20;
   }`
 
-  const handleChanges = e => {
-    this.setState({
-        userInfo: {
-            ...this.state.userInfo,
-            [e.target.name]: e.target.value
-        }
-    });
-};
+//   const handleChanges = e => {
+//     setState({
+//         userInfo: {
+//             ...this.state.userInfo,
+//             [e.target.name]: e.target.value
+//         }
+//     });
+// };
 
 
-const RecipeForm = () => {
+const RecipeForm = props => {
     return (
         <div className="container">
                 <div>
                   <h1>New Recipe</h1>
-                <form noValidate autoComplete="off">
+                <form noValidate autoComplete="off"
+                onSubmit={(addRecipe, tools) => {
+                    tools.resetForm();
+                    props.addRecipe(addRecipe)}}>
                     
                 <select name = "dropdown">
                     <option value = "Choose A Meal" selected>Choose A Meal</option>
@@ -75,7 +79,6 @@ const RecipeForm = () => {
                     type='text'
                     id='title'
                     placeholder='dish title'
-                    onChange={handleChanges}
                     required
                     minLength= "5"
                     maxLength="42"
@@ -118,6 +121,6 @@ const mapStateToProps = state => {
 export default withRouter(
     connect(
         mapStateToProps,
-        {}
+        {addRecipe}
     )(RecipeForm)
 );
