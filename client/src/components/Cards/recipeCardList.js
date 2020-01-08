@@ -1,5 +1,6 @@
 import React from 'react';
 import RecipeCard from './recipeCard';
+import SearchForm from './SearchForm'
 import styled from 'styled-components';
 
 //styleing will go here
@@ -28,6 +29,8 @@ function RecipeCardList(props) {
   return (
     <>
     <RecipeList>
+        <h2>Search by Title</h2>
+        {SearchForm(props.recipes)}
        {props.recipes.map(recipe => (
          RecipeCard(recipe)
       ))}

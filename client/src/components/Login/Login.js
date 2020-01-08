@@ -13,7 +13,7 @@ display: flex;
 width: 30%;
 height: 50%;
 margin: 0 auto;
-justify-content: center;
+justify-content: space-evenly;
 padding:1%;
 `
 

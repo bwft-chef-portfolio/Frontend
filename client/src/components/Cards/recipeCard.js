@@ -25,6 +25,7 @@ const Card =styled.div`
     }
     
     padding:1%;
+    background:white;
     border: 1px solid black;
     border: 2px solid #1F1E1E;
     margin: 0 1em;
