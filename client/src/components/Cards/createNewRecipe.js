@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import RecipeCard from './recipeCard';
 //I still need to add input validation and axios call
 

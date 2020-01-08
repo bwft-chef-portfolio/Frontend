@@ -3,13 +3,15 @@ import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import RecipeCardList from '../Cards/recipeCardList';
 import {BASE_URL} from '../../utils/axiosWithAuth';
+import {axiosWithAuth} from '../../utils/axiosWithAuth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [recipes, setRecipes] = useState([]);
   const userId = localStorage.getItem('user_id');
+  const token = localStorage.getItem('token');
   useEffect(() => {
-    axios
-      .get(BASE_URL + '/recipes') // /${userId}
+    axiosWithAuth()
+      .get(BASE_URL + `/recipes/${userId}`) // /${userId}
       .then(res => setRecipes(res.data))
       .catch(error => console.log(error));
   }, []);
