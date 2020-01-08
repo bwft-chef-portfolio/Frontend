@@ -8,10 +8,14 @@ import { addUser } from '../../actions';
 
 const LoginWrapper = styled.div `
 display: flex;
+flex-direction: column;
+align-content: center;
+align-items:center;
+justify-content: center;
 width: 30%;
 height: 50%;
 margin: 0 auto;
-justify-content: center;
+
 `
 
 const Input = styled.input`

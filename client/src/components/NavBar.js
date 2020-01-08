@@ -2,23 +2,25 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-const Navigation = styled.div`
+const NavLinks =styled.nav`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    color:white;
-    .nav-links{
-        padding:1%;
+    border-bottom:black 1px solid;
+    margin:0% 0% 0% 0%;
+    padding:1%;
+    width: 98%;
+    max-width: 100%; 
+    background:#333333;
+    a{
+        color:white;
+        &:link{
+            text-decoration: none;
+        }
+        &:visited{
+            text-decoration: none;
     }
-`
-
-const NavLinks =styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    color:white;
 `
 // background: #333333;
 class NavBar extends React.Component {
@@ -30,7 +32,7 @@ class NavBar extends React.Component {
     }
     render() {
         return (
-            <Navigation className='container-nav'>
+            <div className='container-nav'>
                 <nav className='nav-bar'>
                     <div className='nav-logo'>
                         {/* <a href='#'>ChefPort</a> */}
@@ -41,7 +43,7 @@ class NavBar extends React.Component {
                         <Link to='/registration'>Registration</Link>
                     </NavLinks>
                 </nav>
-            </Navigation>
+            </div>
         );
     }
 } 
