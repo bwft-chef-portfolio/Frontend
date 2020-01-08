@@ -13,14 +13,25 @@
 
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import backUpImage from '../images/pizza.jpg';
 //will import styling library we will use
 
 const Card =styled.div`
     display:flex;
     flex-direction:column;
+    justify-content:center;
+    h2 {
+        align-self:center;
+    }
+    
     padding:1%;
-    border: 1% solid gray;
-    color: red;
+    border: 1px solid black;
+    border: 2px solid #1F1E1E;
+    margin: 0 1em;
+    padding: 0.25em 1em;
+    margin:1%;
+    border-radius: 4px;
+    width:33%;
 `
 
 const RecipeCard = (props) => {
@@ -38,20 +49,35 @@ const RecipeCard = (props) => {
         }
     )
     */
-   
+  
+   //this will be used when I get images online
+        function imgError(img){
+            img.oneError = null;
+            img.src = backUpImage;
+            console.log('Triggered Error');
+            return true;
+        }
 
+    //This display description if present
+        function descriptshow(){
+            if(props.description===null){return <p>No Description</p>}
+            else{return <p>Description: {props.description}</p>}
+        }
+//<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
     return(
         <Card>
             <h2>{props.title}</h2>
-            {/* I will need to put image here */}
-            <p>{props.type}</p>
-            <p>{props.description}</p>
-            <p>{props.ingredients}</p>
-            <p>{props.instructions}</p>
-            
+            {//<img src= {backUpImage} />
+            }
+            {/*<img src={props.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
+            <div>
+                <p>Type: {props.type}</p>
+                {descriptshow()}
+                <p>Ingredients: {props.ingredients}</p>
+                <p>Instructions: {props.instructions}</p>
+            </div>           
             
         </Card>
     ) 
 }
-
 export default RecipeCard;
