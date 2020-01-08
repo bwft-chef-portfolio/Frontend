@@ -41,16 +41,9 @@ const RecipeCard = (props) => {
    
 
     return(
-        <Card>
-            <h2>{props.title}</h2>
-            {/* I will need to put image here */}
-            <p>{props.type}</p>
-            <p>{props.description}</p>
-            <p>{props.ingredients}</p>
-            <p>{props.instructions}</p>
-            
-            
-        </Card>
+            <Card>
+              <h4>{props.recipe.recipe_name}</h4>
+            </Card>
     ) 
 }
 

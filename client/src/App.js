@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/withAuth/authRouter';
+import RecipeList from './components/Cards/RecipeList';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path='/' component={NavBar} />
       <Route exact path='/registration' component={Registration} />
       <Route path='/login' component={Login} />
+      <Route path='/recipes' component={RecipeList} />
       
     </div>
   );

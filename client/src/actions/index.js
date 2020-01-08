@@ -137,19 +137,19 @@ export const editRecipe = (id, editedRecipe) => dispatch => {
   }
 
 //GETCARD
-export const GETCARD_FETCH = "GETCARD_FETCH";
-export const GETCARD_SUCCESS = "GETCARD_SUCCESS";
-export const GETCARD_FAILURE = "GETCARD_FAILURE";
+export const GETRECIPE_FETCH = "GETRECIPE_FETCH";
+export const GETRECIPE_SUCCESS = "GETRECIPE_SUCCESS";
+export const GETRECIPE_FAILURE = "GETRECIPE_FAILURE";
 
 const URL = 'https://backendchefls.herokuapp.com/api';
-export const getCard = () => (dispatch) => {
-    dispatch({ type: GETCARD_FETCH })
+export const getRecipe = () => (dispatch) => {
+    dispatch({ type: GETRECIPE_FETCH })
     axios
       .get(`${URL}/recipes`)
       .then(res => {
-        dispatch({ type: GETCARD_SUCCESS, payload: res.data });
+        dispatch({ type: GETRECIPE_SUCCESS, payload: res.data });
       })
       .catch(err => {
-        dispatch({ type: GETCARD_FAILURE, payload: err })
+        dispatch({ type: GETRECIPE_FAILURE, payload: err })
       })
   }
