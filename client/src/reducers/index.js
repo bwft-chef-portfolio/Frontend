@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import {registrationReducer as registration} from './registrationReducer';
 import { loginReducer} from './loginReducer';
 import { chefPageReducer } from './chefPageReducer';
-import { cardReducer } from './cardReducer';
+import {recipeReducer} from './recipeReducer';
 
 export default combineReducers({
-    registration, loginReducer, chefPageReducer, cardReducer
+    registration, loginReducer, chefPageReducer, recipeReducer
 
 });

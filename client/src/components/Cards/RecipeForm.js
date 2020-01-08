@@ -1,6 +1,8 @@
 import React from 'react'
 import {TextField} from '@material-ui/core'
 import styled from "styled-components";
+import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Input = styled.input`
 font-family: 'Quicksand', sans-serif;
@@ -78,7 +80,7 @@ const RecipeForm = () => {
                     minLength= "5"
                     maxLength="42"
                     size="15"
-                    value={recipe.title}
+                    //value={recipe.title}
                     />
 
                 <TextField

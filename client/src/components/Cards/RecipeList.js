@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import axios from 'axios'
 import TestDishData from '../../testdata/testDishData'
 import styled from "styled-components";
-import RecipeCard from './RecipeCard'
+import RecipeCard from './recipeCard'
 import RecipeForm from './RecipeForm'
 
 const Input = styled.input`

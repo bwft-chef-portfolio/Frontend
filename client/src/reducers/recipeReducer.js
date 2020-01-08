@@ -10,7 +10,7 @@ import {
     EDIT_RECIPE_FAILURE,
     DELETE_RECIPE_START,
     DELETE_RECIPE_SUCCESS,
-    DELETE_RECIPE_FAILURE,
+    DELETE_RECIPE_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -20,7 +20,7 @@ const initialState = {
     error: ""
 };
 
-const recipeReducer = (state = initialState, action) => {
+export const recipeReducer = (state = initialState, action) => {
     switch (action.type) {
       case GETRECIPE_FETCH:
         return {
@@ -87,4 +87,4 @@ const recipeReducer = (state = initialState, action) => {
     }
   };
 
-  export default recipeReducer;
+  //export default recipeReducer;
