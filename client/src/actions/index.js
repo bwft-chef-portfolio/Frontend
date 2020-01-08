@@ -19,7 +19,10 @@ export const login = (username, password) => dispatch => {
       })
       .then(res => {
         localStorage.setItem('token', res.data.token);
-        console.log(res.data.token);
+        if(res.data.user_id) {
+          localStorage.setItem('user_id', res.data.user_id);
+        }
+        console.log(res.data);
         dispatch({ type: LOGINSUCCESS, payload: res.data });
         return true
       })
