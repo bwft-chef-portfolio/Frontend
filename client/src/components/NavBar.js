@@ -5,9 +5,22 @@ import styled from 'styled-components';
 const Navigation = styled.div`
     display: flex;
     flex-direction: row;
-
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+    .nav-links{
+        padding:1%;
+    }
 `
 
+const NavLinks =styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+`
+// background: #333333;
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
@@ -17,18 +30,18 @@ class NavBar extends React.Component {
     }
     render() {
         return (
-            <div className='container-nav'>
+            <Navigation className='container-nav'>
                 <nav className='nav-bar'>
                     <div className='nav-logo'>
                         {/* <a href='#'>ChefPort</a> */}
                     </div>
-                    <div className='nav-links'>
+                    <NavLinks>
                         <Link to='/recipes'>Recipes</Link>
                         <Link to='/login'>Login</Link>
                         <Link to='/registration'>Registration</Link>
-                    </div>
+                    </NavLinks>
                 </nav>
-            </div>
+            </Navigation>
         );
     }
 } 
