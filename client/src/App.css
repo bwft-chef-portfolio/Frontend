@@ -68,3 +68,10 @@ color: #797979;
 }
 
 }
+
+form {
+  display: flex;
+  align-content: center;
+  flex-flow: column wrap;
+  width: 55rem;
+}
