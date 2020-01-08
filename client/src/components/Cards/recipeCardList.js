@@ -1,11 +1,15 @@
 import React from 'react';
+import RecipeCard from './recipeCard';
+import styled from 'styled-components';
 
-
-function RecipeCardList(props) {
-
-
-  return (
-    <div>
+//styleing will go here
+const RecipeList = styled.div`
+  display:flex;
+  flex-flow: row wrap;
+  justify-content:space-evenly;
+`
+/*
+   <div>
       {props.recipes.map(recipe => (
         <div key={recipe.id}>
             <h2>{recipe.title}</h2>
@@ -17,6 +21,18 @@ function RecipeCardList(props) {
         </div>
       ))}
     </div>
+*/
+function RecipeCardList(props) {
+
+
+  return (
+    <>
+    <RecipeList>
+       {props.recipes.map(recipe => (
+         RecipeCard(recipe)
+      ))}
+    </RecipeList>
+  </>
   );
 }
 
