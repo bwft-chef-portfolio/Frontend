@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const BASE_URL = 'https://backendchefls.herokuapp.com/api';
+
 export const axiosWithAuth = () => {
     const token = localStorage.getItem('token');
 
@@ -7,6 +9,14 @@ export const axiosWithAuth = () => {
         headers: {
             Authorization: token
         },
-        baseURL: 'https://backendchefls.herokuapp.com/api'
+        baseURL: BASE_URL
+    });
+};
+
+export const axiosNoAuth = () => {
+
+    return axios.create({
+
+        baseURL: BASE_URL
     });
 };
