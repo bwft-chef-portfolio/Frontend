@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, withRouter, Redirect} from 'react-router-dom';
 import {login} from '../../actions/index';
 import styled from 'styled-components';
 
@@ -73,6 +73,10 @@ class Login extends React.Component {
             });
         };
 
+        signup = el =>{
+            el.preventDefault();
+            this.props.history.push('/registration');
+        }
     textFormHandler = e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -109,8 +113,9 @@ class Login extends React.Component {
                     size= "16"
                     value={this.state.password}
                 />
-                <Button onClick={this.login} type="submit">Login</Button>
-                <Button><Link to='/registration'>Sign Up</Link></Button>
+                <div><Button onClick={this.login} type="submit">Login</Button>
+                <Button onClick= {this.signup} >Sign Up</Button>
+                </div>
             </form>
            
         </LoginWrapper>

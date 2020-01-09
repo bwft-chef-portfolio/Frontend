@@ -39,6 +39,25 @@ const Card =styled.div`
     width:33%;
 `
 
+const Button = styled.button`
+font-family: 'Lato', sans-serif;
+width:12rem;
+height:12%;
+  cursor: pointer;
+  background: transparent;
+  font-size: 16px;
+  border-radius: 4px;
+  color: #1F1E1E;
+  border: 2px solid #1F1E1E;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+  transition: 0.5s all ease-out;
+  margin:30px;
+  &:hover {
+    background-color: #1F1E1E;
+    color: #07FE20;
+  }`
+
 const RecipeCard = (props) => {
     //I may need to set state we will see
     /*
@@ -81,7 +100,7 @@ const RecipeCard = (props) => {
         console.log('localStorage user_id = ' + localStorage.getItem('user_id'));
         console.log('recipe.user_id = ' + props.user_id);
         if (props.user_id !== localStorage.getItem('user_id')) { // Set to === for this to only show edit for recipes the logged in user owns
-            return <button onClick={handleEdit}>Edit</button>;
+            return <Button onClick={handleEdit}>Edit</Button>;
         }
         return '';
     }        

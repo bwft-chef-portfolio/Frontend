@@ -18,7 +18,7 @@ font-family: 'Quicksand', sans-serif;
   align-content: center;
   background-color: white;
   border: black 1px solid;
-  width: 15rem;
+  width: 15rem;.
   margin: 8px;
   border-radius: 5px;
   color:black;
