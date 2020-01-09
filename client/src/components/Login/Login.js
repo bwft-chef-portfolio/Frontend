@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {login} from '../../actions/index';
 import styled from 'styled-components';
 
@@ -110,7 +110,9 @@ class Login extends React.Component {
                     value={this.state.password}
                 />
                 <Button onClick={this.login} type="submit">Login</Button>
+                <Button><Link to='/registration'>Sign Up</Link></Button>
             </form>
+           
         </LoginWrapper>
     )
 
