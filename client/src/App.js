@@ -38,6 +38,7 @@ function App() {
       />
       <PrivateRoute path='/user-recipes-list'/>
       <Route path='/add-recipe-card' component={CreateNewRecipe} />
+      <Route path='/edit-item:id' component={CreateNewRecipe} />
       
     </div>
   );
