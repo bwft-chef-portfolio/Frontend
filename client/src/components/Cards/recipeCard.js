@@ -12,6 +12,7 @@
 // instructions: "instructions" (required) }
 
 import React, {useState} from 'react';
+import { Route, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import backUpImage from '../images/pizza.jpg';
 //will import styling library we will use
@@ -53,6 +54,12 @@ const RecipeCard = (props) => {
         }
     )
     */
+
+   const handleEdit = e => {
+    e.preventDefault();
+    props.history.push(`/edit-item:${props.id}`);
+    console.log(props)
+  };
   
    //this will be used when I get images online
         function imgError(img){
@@ -68,6 +75,17 @@ const RecipeCard = (props) => {
             else{return <p>Description: {props.description}</p>}
         }
 //<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
+
+    function EditButton(recipeUserId) {
+        console.log(props);
+        console.log('localStorage user_id = ' + localStorage.getItem('user_id'));
+        console.log('recipe.user_id = ' + props.user_id);
+        if (props.user_id !== localStorage.getItem('user_id')) { // Set to === for this to only show edit for recipes the logged in user owns
+            return <button onClick={handleEdit}>Edit</button>;
+        }
+        return '';
+    }        
+
     return(
         <Card>
             <h2>{props.title}</h2>
@@ -80,9 +98,9 @@ const RecipeCard = (props) => {
                 {descriptshow()}
                 <p>Ingredients: {props.ingredients}</p>
                 <p>Instructions: {props.instructions}</p>
-            </div>           
-            
+            </div>     
+            <EditButton recipeUserId={props.user_id} />
         </Card>
     ) 
 }
-export default RecipeCard;
+export default withRouter(RecipeCard);

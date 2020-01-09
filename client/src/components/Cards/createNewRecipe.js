@@ -13,12 +13,33 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 // instructions: "instructions" (required) }
 const CreateNewRecipe = (props) => {
 
+    console.log(props)
+
+    const didMount = useEffect(() => {
+        console.log('mounted')
+        const id = props.match.params.id;
+        if (id) {
+            console.log(id.substring(1))
+            axiosWithAuth()
+            .get(`/recipes/${id.substring(1)}/recipe`)
+            .then(res => {
+                const recipe = res.data;
+                setRecipe(recipe);
+                console.log('RECIPE');
+                console.log(recipe);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    }, [])
+
     const [recipe, setRecipe] = useState(
         {
-        user_id:localStorage.getItem('user_id'), //Will be determined by props
+        user_id: localStorage.getItem('user_id'), //Will be determined by props
         type: "",
         img_url:"",//We will need to do this tomorrow
-        title:"",
+        title: "",
         description:"",
         ingredients:"",
         instructions:""
@@ -33,37 +54,46 @@ const CreateNewRecipe = (props) => {
             [el.target.name]:el.target.value
         })
     }
+
+    const deleteRecipe = e => {
+        e.preventDefault();
+        axiosWithAuth()
+        .delete(`/recipes/${recipe.id}`)
+        .then(res => {
+            console.log(res)
+            props.history.push(`/user-recipes-list`);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
     
     const submitForm = e => {
         e.preventDefault();
         
-
-        axiosWithAuth()
+        // No recipe ID, so we create a new recipe
+        if (!recipe.id) {
+            axiosWithAuth()
             .post('/recipes', recipe)
             .then(res => {
-               
                 console.log(res)
-                
             })
             .catch(err => {
                 console.log(err)
             })
-        console.log(recipe);
+            console.log('RECIPE');
+            console.log(recipe);
+        } else { // We have a recipe ID, update the recipe
+            axiosWithAuth()
+            .put(`/recipes/${recipe.id}`, recipe)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
     }
-
-    // const newRecipe = e => {
-    //     e.preventDefault();
-
-    //     axiosWithAuth()
-    //         .post('/recipes', recipe)
-    //         .then(res => {
-    //             localStorage.setItem('token', res.data.payload)
-    //             console.log(res)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }
 
     return(
         <>
@@ -74,11 +104,11 @@ const CreateNewRecipe = (props) => {
             name="type"
             onChange={handleChanges}
             required
-            value={recipe.type}>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Dinner">Dinner</option>
-                <option value="Snack">Snack</option>
+            value={recipe.type.toLowerCase()}>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
             </select>
             <label htmlFor='title'>Title:</label>
             <input
@@ -128,6 +158,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.instructions}
             />
             <button type="submit">Submit</button>
+            <button onClick={deleteRecipe}>Delete</button>
 
         </form>
         {RecipeCard(recipe)}
