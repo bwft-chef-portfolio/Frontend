@@ -21,6 +21,7 @@ const NavLinks =styled.nav`
         &:visited{
             text-decoration: none;
     }
+    }   
 `
 // background: #333333;
 class NavBar extends React.Component {

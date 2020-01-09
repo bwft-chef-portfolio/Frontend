@@ -3,6 +3,13 @@ import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
+//USE_ID
+export const SET_ID = "SET_ID";
+
+export const storeUserId = (user_id) => dispatch => {
+  dispatch({ type: SET_ID, payload:user_id });
+}
+
 
 
 // LOGIN

@@ -71,6 +71,7 @@ const RecipeCard = (props) => {
             {//<img src= {backUpImage} />
             }
             {/*<img src={props.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
+            <img src={props.img_url}/>
             <div>
                 <p>Type: {props.type}</p>
                 {descriptshow()}
