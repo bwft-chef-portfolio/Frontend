@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
   useEffect(() => {
     axiosWithAuth()
-      .get(BASE_URL + `/recipes/${userId}`) // /${userId}
+      .get(`/recipes/${userId}`) // /${userId}
       .then(res => setRecipes(res.data))
       .catch(error => console.log(error));
   }, []);

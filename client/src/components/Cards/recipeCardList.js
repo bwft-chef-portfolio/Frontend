@@ -8,31 +8,16 @@ const RecipeList = styled.div`
   flex-flow: row wrap;
   justify-content:space-evenly;
 `
-/*
-   <div>
-      {props.recipes.map(recipe => (
-        <div key={recipe.id}>
-            <h2>{recipe.title}</h2>
-            <img src={recipe.img_url}></img>
-            <p>{recipe.type}</p>
-            <p>{recipe.description}</p>
-            <p>{recipe.ingredients}</p>
-            <p>{recipe.instructions}</p>
-        </div>
-      ))}
-    </div>
-*/
+
 function RecipeCardList(props) {
 
 
   return (
-    <>
     <RecipeList>
        {props.recipes.map(recipe => (
          RecipeCard(recipe)
       ))}
     </RecipeList>
-  </>
   );
 }
 

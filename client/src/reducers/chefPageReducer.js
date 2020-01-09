@@ -11,9 +11,11 @@ import {
     EDIT_RECIPE_START,
     EDIT_RECIPE_SUCCESS,
     EDIT_RECIPE_FAILURE,
+    SET_ID
 } from '../actions';
   
 const initialState = {
+userId: '',
 error: '',
 fetchingData: false,
 chefData: [],
@@ -21,6 +23,11 @@ chefData: [],
   
 export const chefPageReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_ID :
+            return {
+                ...state,
+                userId: action.payload
+            }
         case FETCH_DATA_START:
             return {
                 ...state,

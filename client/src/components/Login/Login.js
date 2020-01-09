@@ -68,7 +68,7 @@ class Login extends React.Component {
             e.preventDefault();
             this.props.login(this.state.username, this.state.password).then(res => {
                 if (res) {
-                    this.props.history.push('/protected');
+                    this.props.history.push(`/user-recipes-list`);
                 }
             });
         };
