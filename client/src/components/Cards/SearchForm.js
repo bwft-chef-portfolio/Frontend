@@ -7,7 +7,6 @@ display:flex;
 flex-flow: row wrap;
 justify-content:space-evenly;
 background: #333333;
-
 `
 const Input = styled.input`
 font-family: 'Quicksand', sans-serif;
@@ -48,6 +47,7 @@ export default function SearchForm(props) {
       <section>
         <div>
             <form>
+                <h2>Search by Title</h2>
                 <Input
                     type='text'
                     onChange={handleChange}

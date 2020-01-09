@@ -23,7 +23,10 @@ const Card =styled.div`
     h2 {
         align-self:center;
     }
-    
+    img{
+        align-self:center;
+        max-width:100%;
+    }
     padding:1%;
     background:white;
     border: 1px solid black;

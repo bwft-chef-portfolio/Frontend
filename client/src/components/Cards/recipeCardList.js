@@ -29,11 +29,8 @@ function RecipeCardList(props) {
   return (
     <>
     <RecipeList>
-        <h2>Search by Title</h2>
         {SearchForm(props.recipes)}
-       {props.recipes.map(recipe => (
-         RecipeCard(recipe)
-      ))}
+       {/*props.recipes.map(recipe => (RecipeCard(recipe)))*/}
     </RecipeList>
   </>
   );
