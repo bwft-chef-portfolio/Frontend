@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import RecipeCard from './recipeCard';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {editRecipe} from '../../actions/index';
+
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -11,31 +15,28 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 // description: "description,
 // ingredients: "ingredients" (required),
 // instructions: "instructions" (required) }
-const initialItem = {
-    
-    user_id: localStorage.getItem('user_id'), //Will be determined by props
-    type: "",
-    img_url:"",//We will need to do this tomorrow
-    title: "",
-    description:"",
-    ingredients:"",
-    instructions:""
-    
-}
 
-const EditRecipe = (props) => {
+const EditRecipe = (props) => { 
 
     console.log(props)
 
-    const [recipe, setRecipe] = useState(initialItem);
+    const initialState = {
+    
+        user_id: localStorage.getItem('user_id'), 
+        type: "",
+        img_url:"",
+        title: "",
+        description:"",
+        ingredients:"",
+        instructions:""
+        
+    }
+    const [recipe, setRecipe] = useState(initialState);
+
 
     useEffect(() => {
-        const recipeToEdit = props.recipes.find(
-            e => `${e.recipe.id}` === props.match.params.id
-        );
-        if (recipeToEdit) {
-            setRecipe(recipeToEdit)
-        }
+        setRecipe(props.recipe)
+        console.log('EDIT RECIPE PROPS', props);
     }, [props.recipes, props.match.params.id]);
 
     const handleChanges = el => {
@@ -65,12 +66,10 @@ const EditRecipe = (props) => {
         e.preventDefault();
         props.history.push(`/user-recipes-list`)
 
-        // No recipe ID, so we create a new recipe
         axiosWithAuth()
-        .put(`/recipes/${recipe.id}`, recipe)
+        .put(`/recipes/${recipe.id}`, props.title, props.img_url, props.type, props.description, props.ingredients, props.instructions)
         .then(res => {
             console.log(res)
-            props.updateRecipe(res.data);
         })
         .catch(err => {
             console.log(err)
@@ -148,4 +147,17 @@ const EditRecipe = (props) => {
     )
 }
 
-export default EditRecipe;
+const mapStateToProps = state => {
+    return {
+        userId: state.userId,
+        error: state.userId,
+        recipes: state.recipes
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps, 
+        {editRecipe}
+    )(EditRecipe)
+) 

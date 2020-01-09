@@ -19,6 +19,7 @@ userId: '',
 error: '',
 fetchingData: false,
 chefData: [],
+recipes: []
 };
   
 export const chefPageReducer = (state = initialState, action) => {

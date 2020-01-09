@@ -15,6 +15,9 @@ import React, {useState} from 'react';
 import { Route, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import backUpImage from '../images/pizza.jpg';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import EditRecipe from './editRecipe';
 //will import styling library we will use
 
 const Card =styled.div`
@@ -35,7 +38,37 @@ const Card =styled.div`
     width:33%;
 `
 
-const RecipeCard = (props) => {
+const useStyles = makeStyles(theme => ({
+    card: {
+      maxWidth: 345,
+      textAlign: "center",
+    },
+    media: {
+      height: 140,
+    },
+    modalBox: {
+      position: 'absolute',
+      width: 600,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
+
+const UserRecipeCard = (props) => {
+    console.log('USER RECIPE CARD', props);
+    const [open, setOpen] = React.useState(false);
+    const classes = useStyles();
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+
     //I may need to set state we will see
     /*
     const [recipe, setRecipe]= useState(
@@ -68,8 +101,8 @@ const RecipeCard = (props) => {
 
     //This display description if present
         function descriptshow(){
-            if(props.description===null){return <p>No Description</p>}
-            else{return <p>Description: {props.description}</p>}
+            if(props.recipe.description===null){return <p>No Description</p>}
+            else{return <p>Description: {props.recipe.description}</p>}
         }
 //<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
 
@@ -84,6 +117,7 @@ const RecipeCard = (props) => {
     }        
 
     return(
+
         <Card>
             <h2>{props.recipe.title}</h2>
             {//<img src= {backUpImage} />
@@ -97,7 +131,19 @@ const RecipeCard = (props) => {
                 <p>Ingredients: {props.recipe.ingredients}</p>
                 <p>Instructions: {props.recipe.instructions}</p>
             </div>     
+            <button onClick={handleOpen}>Edit</button>
+            <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={open}
+                onClose={handleClose}
+                className={classes.flex}
+                >   
+                <div className = {classes.modalBox}>
+                <EditRecipe {...props} recipe={props.recipe} title={props.recipe.title} img_url={props.recipe.img_url} type={props.recipe.type} description={props.recipe.description} ingredients={props.recipe.ingredients} instructions={props.recipe.instructions}/>
+                </div>
+            </Modal>
         </Card>
     ) 
 }
-export default withRouter(RecipeCard);
+export default withRouter(UserRecipeCard);
