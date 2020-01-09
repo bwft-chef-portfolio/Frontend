@@ -2,6 +2,10 @@ import React, {useState, useEffect} from 'react';
 import RecipeCard from './recipeCard';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import styled from 'styled-components';
+import Button from '../FormInputs/Button';
+import Select from '../FormInputs/Select';
+import TextArea from '../FormInputs/TextArea';
+import Input from '../FormInputs/Input';
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -35,10 +39,10 @@ const Wrapper =styled.div`
   justify-content:center;
   align-content:center;
 `
-const Input = styled.input`${defaultStyling}`
-const Select = styled.select`${defaultStyling}`
-const TextArea =styled.textarea`${defaultStyling}`
-const Button =styled.button`${defaultStyling}`
+
+
+
+
 
 
 const CreateNewRecipe = (props) => {
@@ -134,7 +138,7 @@ const CreateNewRecipe = (props) => {
             name="type"
             onChange={handleChanges}
             required
-            value={recipe.type.toLowerCase()}>
+            value={recipe.type}>
                 <option value="breakfast">Breakfast</option>
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>

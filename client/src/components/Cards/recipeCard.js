@@ -15,6 +15,7 @@ import React, {useState} from 'react';
 import { Route, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import backUpImage from '../images/pizza.jpg';
+import Button from '../FormInputs/Button';
 //will import styling library we will use
 
 const Card =styled.div`
@@ -39,44 +40,13 @@ const Card =styled.div`
     width:33%;
 `
 
-const Button = styled.button`
-font-family: 'Lato', sans-serif;
-width:12rem;
-height:12%;
-  cursor: pointer;
-  background: transparent;
-  font-size: 16px;
-  border-radius: 4px;
-  color: #1F1E1E;
-  border: 2px solid #1F1E1E;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-  transition: 0.5s all ease-out;
-  margin:30px;
-  &:hover {
-    background-color: #1F1E1E;
-    color: #07FE20;
-  }`
+
 
 const RecipeCard = (props) => {
-    //I may need to set state we will see
-    /*
-    const [recipe, setRecipe]= useState(
-        {
-            user_id:props.user_id, //Will be determined by props
-            type: "",
-            img_url:"",//We will need to do this tomorrow
-            title:"",
-            description:"",
-            ingredients:"",
-            instructions:"" 
-        }
-    )
-    */
-
+    
    const handleEdit = e => {
     e.preventDefault();
-    props.history.push(`/edit-item:${props.id}`);
+    props.history.push(`/edit-item/${props.id}`);
     console.log(props)
   };
   
@@ -87,6 +57,12 @@ const RecipeCard = (props) => {
             console.log('Triggered Error');
             return true;
         }
+
+    const oneCard = el =>{
+           el.preventDefault();
+           //This will link to single
+           //props.history.push(`/card/${props.id}`);
+     }
 
     //This display description if present
         function descriptshow(){
@@ -106,7 +82,7 @@ const RecipeCard = (props) => {
     }        
 
     return(
-        <Card>
+        <Card onClick={oneCard} >
             <h2>{props.title}</h2>
             {//<img src= {backUpImage} />
             }

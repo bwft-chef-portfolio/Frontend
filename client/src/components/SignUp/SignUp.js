@@ -5,6 +5,8 @@ import ChefPort_Logo from '../images/ChefPort_Logo.png'
 import {connect} from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { addUser } from '../../actions';
+import Input from '../FormInputs/Input';
+import Button from '../FormInputs/Button';
 
 const LoginWrapper = styled.div `
 display: flex;
@@ -19,22 +21,6 @@ margin: 0 auto;
     margin-top:1%;
 }
 `
-const Input = styled.input`
-font-family: 'Quicksand', sans-serif;
-  font-size: 12px;
-  padding: 10px;
-  background: papayawhip;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  background-color: white;
-  border: black 1px solid;
-  width: 15rem;
-  margin: 8px;
-  border-radius: 5px;
-  color:black;
-`
 
 const Label = styled.label`
 font-size: 20px;
@@ -42,25 +28,6 @@ padding: 10px;
 margin-top:-10px;
 `
 
-const Button = styled.button`
-font-family: 'Lato', sans-serif;
-width:12rem;
-height:12%;
-  cursor: pointer;
-  background: transparent;
-  font-size: 16px;
-  border-radius: 4px;
-  color: #1F1E1E;
-  border: 2px solid #1F1E1E;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-  transition: 0.5s all ease-out;
-  margin:30px;
-  align-content: center;
-  &:hover {
-    background-color: #1F1E1E;
-    color: #07FE20;
-  }`
 
 class Registration extends React.Component {
     state = {

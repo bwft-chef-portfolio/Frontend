@@ -9,7 +9,7 @@ import PrivateRoute from './components/withAuth/authRouter';
 import RecipeCardList from './components/Cards/recipeCardList';
 import {BASE_URL} from './utils/axiosWithAuth';
 import CreateNewRecipe from './components/Cards/createNewRecipe';
-
+import DisplayCard from './components/Cards/displayCard';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -38,7 +38,8 @@ function App() {
       />
       <PrivateRoute path='/user-recipes-list'/>
       <Route path='/add-recipe-card' component={CreateNewRecipe} />
-      <Route path='/edit-item:id' component={CreateNewRecipe} />
+      <Route path='/edit-item/:id' component={CreateNewRecipe} />
+      <Route path='/card/:id' compontent={DisplayCard}/>
       
     </div>
   );
