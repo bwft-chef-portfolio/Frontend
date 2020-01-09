@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import RecipeCard from './recipeCard';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -14,7 +15,7 @@ const CreateNewRecipe = (props) => {
 
     const [recipe, setRecipe] = useState(
         {
-        user_id:props, //Will be determined by props
+        user_id:localStorage.getItem('user_id'), //Will be determined by props
         type: "",
         img_url:"",//We will need to do this tomorrow
         title:"",
@@ -25,29 +26,44 @@ const CreateNewRecipe = (props) => {
     )
 
     const handleChanges = el => {
-        console.log([el.target.name])
-        console.log(el.target)
+        // console.log([el.target.name])
+        // console.log(el.target)
         setRecipe({
             ...recipe,
             [el.target.name]:el.target.value
         })
     }
     
-    const submitForm = el => {
-        el.preventDefault();
+    const submitForm = e => {
+        e.preventDefault();
         
-        console.log("I will put my axios call here")
-        //This may need to not be reset for final
-        //It will require that axios send user id to server with info
-        setRecipe({user_id:"", //Will be determined by props
-        type: "",
-        img_url:"",//We will need to do this tomorrow
-        title:"",
-        description:"",
-        ingredients:"",
-        instructions:""})
-        
+
+        axiosWithAuth()
+            .post('/recipes', recipe)
+            .then(res => {
+               
+                console.log(res)
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        console.log(recipe);
     }
+
+    // const newRecipe = e => {
+    //     e.preventDefault();
+
+    //     axiosWithAuth()
+    //         .post('/recipes', recipe)
+    //         .then(res => {
+    //             localStorage.setItem('token', res.data.payload)
+    //             console.log(res)
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }
 
     return(
         <>
