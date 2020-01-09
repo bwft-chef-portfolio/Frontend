@@ -11,40 +11,32 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 // description: "description,
 // ingredients: "ingredients" (required),
 // instructions: "instructions" (required) }
-const CreateNewRecipe = (props) => {
+const initialItem = {
+    
+    user_id: localStorage.getItem('user_id'), //Will be determined by props
+    type: "",
+    img_url:"",//We will need to do this tomorrow
+    title: "",
+    description:"",
+    ingredients:"",
+    instructions:""
+    
+}
+
+const EditRecipe = (props) => {
 
     console.log(props)
 
-    const didMount = useEffect(() => {
-        console.log('mounted')
-        const id = props.match.params.id;
-        if (id) {
-            console.log(id.substring(1))
-            axiosWithAuth()
-            .get(`/recipes/${id.substring(1)}/recipe`)
-            .then(res => {
-                const recipe = res.data;
-                setRecipe(recipe);
-                console.log('RECIPE');
-                console.log(recipe);
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
-    }, [])
+    const [recipe, setRecipe] = useState(initialItem);
 
-    const [recipe, setRecipe] = useState(
-        {
-        user_id: localStorage.getItem('user_id'), //Will be determined by props
-        type: "",
-        img_url:"",//We will need to do this tomorrow
-        title: "",
-        description:"",
-        ingredients:"",
-        instructions:""
+    useEffect(() => {
+        const recipeToEdit = props.recipes.find(
+            e => `${e.recipe.id}` === props.match.params.id
+        );
+        if (recipeToEdit) {
+            setRecipe(recipeToEdit)
         }
-    )
+    }, [props.recipes, props.match.params.id]);
 
     const handleChanges = el => {
         // console.log([el.target.name])
@@ -74,26 +66,15 @@ const CreateNewRecipe = (props) => {
         props.history.push(`/user-recipes-list`)
 
         // No recipe ID, so we create a new recipe
-            axiosWithAuth()
-            .post('/recipes', recipe)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-            console.log('RECIPE');
-            console.log(recipe);
-        // } else { // We have a recipe ID, update the recipe
-        //     axiosWithAuth()
-        //     .put(`/recipes/${recipe.id}`, recipe)
-        //     .then(res => {
-        //         console.log(res)
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
-        // }
+        axiosWithAuth()
+        .put(`/recipes/${recipe.id}`, recipe)
+        .then(res => {
+            console.log(res)
+            props.updateRecipe(res.data);
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return(
@@ -158,7 +139,7 @@ const CreateNewRecipe = (props) => {
             maxLength="500"
             value={recipe.instructions}
             />
-            <button type="submit">Submit</button>
+            <button type="submit">Edit</button>
             <button onClick={deleteRecipe}>Delete</button>
 
         </form>
@@ -167,4 +148,4 @@ const CreateNewRecipe = (props) => {
     )
 }
 
-export default CreateNewRecipe;
+export default EditRecipe;

@@ -15,7 +15,7 @@ function RecipeCardList(props) {
   return (
     <RecipeList>
        {props.recipes.map(recipe => (
-         RecipeCard(recipe)
+         <RecipeCard key={recipe.id} recipe={recipe}/>
       ))}
     </RecipeList>
   );

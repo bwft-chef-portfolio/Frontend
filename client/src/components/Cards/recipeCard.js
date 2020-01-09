@@ -53,8 +53,9 @@ const RecipeCard = (props) => {
 
    const handleEdit = e => {
     e.preventDefault();
-    props.history.push(`/edit-item:${props.id}`);
-    console.log(props)
+    props.history.push(`/edit-item/${props.id}`);
+    console.log(props.id);
+    // console.log(props)
   };
   
    //this will be used when I get images online
@@ -73,9 +74,9 @@ const RecipeCard = (props) => {
 //<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
 
     function EditButton(recipeUserId) {
-        console.log(props);
-        console.log('localStorage user_id = ' + localStorage.getItem('user_id'));
-        console.log('recipe.user_id = ' + props.user_id);
+        // console.log(props);
+        // console.log('localStorage user_id = ' + localStorage.getItem('user_id'));
+        // console.log('recipe.user_id = ' + props.user_id);
         if (props.user_id !== localStorage.getItem('user_id')) { // Set to === for this to only show edit for recipes the logged in user owns
             return <button onClick={handleEdit}>Edit</button>;
         }
@@ -84,18 +85,19 @@ const RecipeCard = (props) => {
 
     return(
         <Card>
-            <h2>{props.title}</h2>
+            <h2>{props.recipe.title}</h2>
             {//<img src= {backUpImage} />
             }
-            {/*<img src={props.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
-            <img src={props.img_url}/>
+            {/*<img src={props.recipe.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
+            <img src={props.recipe.img_url}/>
             <div>
-                <p>Type: {props.type}</p>
+                <h1>Chef: {props.recipe.username}</h1>
+                <p>Type: {props.recipe.type}</p>
                 {descriptshow()}
-                <p>Ingredients: {props.ingredients}</p>
-                <p>Instructions: {props.instructions}</p>
+                <p>Ingredients: {props.recipe.ingredients}</p>
+                <p>Instructions: {props.recipe.instructions}</p>
             </div>     
-            <EditButton recipeUserId={props.user_id} />
+            <EditButton recipeUserId={props.recipe.user_id} />
         </Card>
     ) 
 }
