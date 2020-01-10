@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {login} from '../../actions/index';
 import styled from 'styled-components';
-
+import Button from '../FormInputs/Button';
+import Input from '../FormInputs/Input';
+import Select from '../FormInputs/Select';
+import Textarea from '../FormInputs/TextArea';
 /* 
     The purpose of this component is to have a form that asks for the users user name, and password
     and submits.
@@ -18,42 +21,7 @@ padding:1%;
 `
 
 
-const Input = styled.input`
-font-family: 'Quicksand', sans-serif;
-  font-size: 12px;
-  padding: 10px;
-  background: papayawhip;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  background-color: white;
-  border: black 1px solid;
-  width: 15rem;
-  margin: 8px;
-  border-radius: 5px;
-  color:black;
-`
 
-
-const Button = styled.button`
-font-family: 'Lato', sans-serif;
-width:12rem;
-height:12%;
-  cursor: pointer;
-  background: transparent;
-  font-size: 16px;
-  border-radius: 4px;
-  color: #1F1E1E;
-  border: 2px solid #1F1E1E;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-  transition: 0.5s all ease-out;
-  margin:30px;
-  &:hover {
-    background-color: #1F1E1E;
-    color: #07FE20;
-  }`
 
 class Login extends React.Component {
     //States

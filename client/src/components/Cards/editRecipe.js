@@ -4,7 +4,10 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {editRecipe} from '../../actions/index';
-
+import Button from '../FormInputs/Button';
+import Input from '../FormInputs/Input';
+import Select from '../FormInputs/Select';
+import Textarea from '../FormInputs/TextArea';
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -83,14 +86,14 @@ const EditRecipe = (props) => {
         <>
         <form onSubmit={submitForm}>
             <label htmlFor='type'>Image:</label>
-            <input 
+            <Input
             name='img_url'
             type='text'
             onChange={handleChanges}
             value={recipe.img_url}
             />
             <label htmlFor='type'>Type:</label>
-            <select
+            <Select
             id="type"
             name="type"
             onChange={handleChanges}
@@ -100,9 +103,9 @@ const EditRecipe = (props) => {
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
                 <option value="snack">Snack</option>
-            </select>
+            </Select>
             <label htmlFor='title'>Title:</label>
-            <input
+            <Input
             name='title'
             type='text'
             id='title'
@@ -116,7 +119,7 @@ const EditRecipe = (props) => {
             />
             {/*Leaving off image url until stretch time */}
             <label htmlFor='description'>Description:</label>
-            <textarea
+            <Textarea
             name='description'
             type='text'
             id='description'
@@ -127,7 +130,7 @@ const EditRecipe = (props) => {
             value={recipe.description}
             />
             <label htmlFor='ingredients'> Ingredients:</label>
-            <textarea
+            <Textarea
             name='ingredients'
             type='text'
             id='ingredients'
@@ -138,7 +141,7 @@ const EditRecipe = (props) => {
             value={recipe.ingredients}
             />
             <label htmlFor='instructions'>Instructions:</label>
-            <textarea
+            <Textarea
             name='instructions'
             type='text'
             id='instructions'
@@ -148,8 +151,8 @@ const EditRecipe = (props) => {
             maxLength="500"
             value={recipe.instructions}
             />
-            <button type="submit">Edit</button>
-            <button onClick={deleteRecipe}>Delete</button>
+            <Button type="submit">Edit</Button>
+            <Button onClick={deleteRecipe}>Delete</Button>
 
         </form>
         <RecipeCard recipe={recipe}/>

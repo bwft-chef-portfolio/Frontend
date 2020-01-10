@@ -18,6 +18,10 @@ import backUpImage from '../images/pizza.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import EditRecipe from './editRecipe';
+import Button from '../FormInputs/Button';
+import Input from '../FormInputs/Input';
+import Select from '../FormInputs/Select';
+import Textarea from '../FormInputs/TextArea';
 //will import styling library we will use
 
 const Card =styled.div`
@@ -137,8 +141,8 @@ const UserRecipeCard = (props) => {
                 <p>Ingredients: {props.recipe.ingredients}</p>
                 <p>Instructions: {props.recipe.instructions}</p>
             </div>     
-            <button onClick={handleOpen}>Edit</button>
-            <button onClick={() => props.deleteRecipe(props.recipe.id)}>Delete</button>
+            <Button onClick={handleOpen}>Edit</Button>
+            <Button onClick={() => props.deleteRecipe(props.recipe.id)}>Delete</Button>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
