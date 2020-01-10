@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from './recipeCard';
 import styled from 'styled-components';
 import RecipeCardList from "./recipeCardList";
-import Button from '../FormInputs/Button';
 import Input from '../FormInputs/Input';
-import Select from '../FormInputs/Select';
-import Textarea from '../FormInputs/TextArea';
+import Button from '../FormInputs/Button';
+
+const Searchbox = styled.div`
+display:flex;
+flex-flow: row wrap;
+justify-content:space-evenly;
+background: #333333;
+width: 100%;
+`
 
 export default function SearchForm2(props){
     const [query, setQuery] = useState('');
@@ -48,7 +54,7 @@ background: #333333;
                     <form>
                         <Input
                         type="text"
-                        placeholder="Enter Tool Name"
+                        placeholder="Enter Recipe Name"
                         onChange={filterList}
                         value={query}/>
                     </form>              
@@ -66,15 +72,15 @@ background: #333333;
                 <form>
                     <Input
                     type="text"
-                    placeholder="Enter Tool Name"
+                    placeholder="Enter Recipe Name"
                     onChange={filterList}
                     value={query}/>
-                </form>
+                </form>             
                 <Searchbox>
                 {queryResults.map(recipe =>
                     <RecipeCard key={recipe.id} recipe={recipe} history={props.history} />
                 )}
                 </Searchbox>
-            </div>
+        </div>
         );
 }
