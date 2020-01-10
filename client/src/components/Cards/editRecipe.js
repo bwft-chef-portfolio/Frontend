@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import RecipeCard from './recipeCard';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import styled from 'styled-components';
-import Button from '../FormInputs/Button';
-import Select from '../FormInputs/Select';
-import TextArea from '../FormInputs/TextArea';
-import Input from '../FormInputs/Input';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {editRecipe} from '../../actions/index';
+
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -17,68 +16,25 @@ import Input from '../FormInputs/Input';
 // ingredients: "ingredients" (required),
 // instructions: "instructions" (required) }
 
-const defaultStyling = `
-font-family: 'Quicksand', sans-serif;
-font-size: 12px;
-padding: 10px;
-background: papayawhip;
-border: none;
-display: flex;
-flex-direction: column;
-align-content: center;
-background-color: white;
-border: black 1px solid;
-width: 15rem;
-margin: 8px;
-border-radius: 5px;
-color:black;
-`
-const Wrapper =styled.div`
-  display:flex;
-  flex-flow: column  wrap;
-  justify-content:center;
-  align-content:center;
-`
+const EditRecipe = (props) => { 
 
+    // console.log(props)
 
-
-
-
-
-const CreateNewRecipe = (props) => {
-
-    console.log(props)
-
-    const didMount = useEffect(() => {
-        console.log('mounted')
-        const id = props.match.params.id;
-        if (id) {
-            console.log(id.substring(1))
-            axiosWithAuth()
-            .get(`/recipes/${id.substring(1)}/recipe`)
-            .then(res => {
-                const recipe = res.data;
-                setRecipe(recipe);
-                console.log('RECIPE');
-                console.log(recipe);
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
-    }, [])
-
-    const [recipe, setRecipe] = useState(
-        {
-        user_id: localStorage.getItem('user_id'), //Will be determined by props
+    const initialState = {
+    
+        user_id: localStorage.getItem('user_id'), 
         type: "",
-        img_url:"",//We will need to do this tomorrow
+        img_url:"",
         title: "",
         description:"",
         ingredients:"",
         instructions:""
-        }
-    )
+        
+    }
+    const [recipe, setRecipe] = useState(initialState);
+
+
+
 
     const handleChanges = el => {
         // console.log([el.target.name])
@@ -86,7 +42,7 @@ const CreateNewRecipe = (props) => {
         const value = el.target.name === 'type' ? el.target.value.toLowerCase() : el.target.value;
         setRecipe({
             ...recipe,
-            [el.target.name]:value
+            [el.target.name]:el.target.value
         })
     }
 
@@ -102,36 +58,29 @@ const CreateNewRecipe = (props) => {
             console.log(err)
         })
     }
-    
+
+    useEffect(() => {
+        setRecipe(props.recipe)
+        console.log('EDIT RECIPE PROPS', props);
+    }, [props.recipes]);
+
     const submitForm = e => {
         e.preventDefault();
-        props.history.push(`/user-recipes-list`)
-
-        // No recipe ID, so we create a new recipe
-            axiosWithAuth()
-            .post('/recipes', recipe)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-            console.log('RECIPE');
-            console.log(recipe);
-        // } else { // We have a recipe ID, update the recipe
-        //     axiosWithAuth()
-        //     .put(`/recipes/${recipe.id}`, recipe)
-        //     .then(res => {
-        //         console.log(res)
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
-        // }
+        
+        console.log('EDIT TITLE', props.title)
+        axiosWithAuth()
+        .put(`/recipes/${recipe.id}`, recipe)
+        .then(res => {
+            console.log(res)
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return(
-        <Wrapper>
+        <>
         <form onSubmit={submitForm}>
             <label htmlFor='type'>Image:</label>
             <input 
@@ -141,7 +90,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.img_url}
             />
             <label htmlFor='type'>Type:</label>
-            <Select
+            <select
             id="type"
             name="type"
             onChange={handleChanges}
@@ -151,9 +100,9 @@ const CreateNewRecipe = (props) => {
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
                 <option value="snack">Snack</option>
-            </Select>
+            </select>
             <label htmlFor='title'>Title:</label>
-            <Input
+            <input
             name='title'
             type='text'
             id='title'
@@ -167,7 +116,7 @@ const CreateNewRecipe = (props) => {
             />
             {/*Leaving off image url until stretch time */}
             <label htmlFor='description'>Description:</label>
-            <TextArea
+            <textarea
             name='description'
             type='text'
             id='description'
@@ -178,7 +127,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.description}
             />
             <label htmlFor='ingredients'> Ingredients:</label>
-            <TextArea
+            <textarea
             name='ingredients'
             type='text'
             id='ingredients'
@@ -189,7 +138,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.ingredients}
             />
             <label htmlFor='instructions'>Instructions:</label>
-            <TextArea
+            <textarea
             name='instructions'
             type='text'
             id='instructions'
@@ -199,13 +148,21 @@ const CreateNewRecipe = (props) => {
             maxLength="500"
             value={recipe.instructions}
             />
-            <Button type="submit">Submit</Button>
-            <Button onClick={deleteRecipe}>Delete</Button>
+            <button type="submit">Edit</button>
+            <button onClick={deleteRecipe}>Delete</button>
 
         </form>
         <RecipeCard recipe={recipe}/>
-        </Wrapper>
+        </>
     )
 }
 
-export default CreateNewRecipe;
+const mapStateToProps = state => {
+    return {
+        userId: state.userId,
+        error: state.userId,
+        recipes: state.recipes
+    };
+};
+
+export default EditRecipe

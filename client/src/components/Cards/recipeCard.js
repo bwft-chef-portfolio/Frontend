@@ -46,8 +46,9 @@ const RecipeCard = (props) => {
     
    const handleEdit = e => {
     e.preventDefault();
-    props.history.push(`/edit-item/${props.id}`);
-    console.log(props)
+    props.history.push(`/edit-recipe/${props.recipe.user_id}`);
+    console.log(props);
+    // console.log(props)
   };
   
    //this will be used when I get images online
@@ -66,8 +67,8 @@ const RecipeCard = (props) => {
 
     //This display description if present
         function descriptshow(){
-            if(props.description===null){return <p>No Description</p>}
-            else{return <p>Description: {props.description}</p>}
+            if(props.recipe.description===null){return <p>No Description</p>}
+            else{return <p>Description: {props.recipe.description}</p>}
         }
 //<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
 
@@ -82,19 +83,19 @@ const RecipeCard = (props) => {
     }        
 
     return(
-        <Card onClick={oneCard} >
-            <h2>{props.title}</h2>
+        <Card>
+            <h2>{props.recipe.title}</h2>
             {//<img src= {backUpImage} />
             }
-            {/*<img src={props.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
-            <img src={props.img_url}/>
+            {/*<img src={props.recipe.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
+            <img src={props.recipe.img_url}/>
             <div>
-                <p>Type: {props.type}</p>
+                <h1>Chef: {props.recipe.username}</h1>
+                <p>Type: {props.recipe.type}</p>
                 {descriptshow()}
-                <p>Ingredients: {props.ingredients}</p>
-                <p>Instructions: {props.instructions}</p>
+                <p>Ingredients: {props.recipe.ingredients}</p>
+                <p>Instructions: {props.recipe.instructions}</p>
             </div>     
-            <EditButton recipeUserId={props.user_id} />
         </Card>
     ) 
 }

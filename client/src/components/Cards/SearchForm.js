@@ -18,7 +18,7 @@ font-family: 'Quicksand', sans-serif;
   align-content: center;
   background-color: white;
   border: black 1px solid;
-  width: 15rem;.
+  width: 15rem;
   margin: 8px;
   border-radius: 5px;
   color:black;
@@ -26,7 +26,7 @@ font-family: 'Quicksand', sans-serif;
 `
 
 export default function SearchForm(props) {
-  const [items, setItems] = useState(props);
+  const [items, setItems] = useState(props.recipe);
     const [query, setQuery] =useState('');
     useEffect(()=>{
         console.log('Your props are:');
