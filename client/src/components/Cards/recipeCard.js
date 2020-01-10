@@ -15,6 +15,7 @@ import React, {useState} from 'react';
 import { Route, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import backUpImage from '../images/pizza.jpg';
+import Button from '../FormInputs/Button';
 //will import styling library we will use
 
 const Card =styled.div`
@@ -24,8 +25,12 @@ const Card =styled.div`
     h2 {
         align-self:center;
     }
-    
+    img{
+        align-self:center;
+        max-width:100%;
+    }
     padding:1%;
+    background:white;
     border: 1px solid black;
     border: 2px solid #1F1E1E;
     margin: 0 1em;
@@ -35,22 +40,10 @@ const Card =styled.div`
     width:33%;
 `
 
-const RecipeCard = (props) => {
-    //I may need to set state we will see
-    /*
-    const [recipe, setRecipe]= useState(
-        {
-            user_id:props.user_id, //Will be determined by props
-            type: "",
-            img_url:"",//We will need to do this tomorrow
-            title:"",
-            description:"",
-            ingredients:"",
-            instructions:"" 
-        }
-    )
-    */
 
+
+const RecipeCard = (props) => {
+    
    const handleEdit = e => {
     e.preventDefault();
     props.history.push(`/edit-recipe/${props.recipe.user_id}`);
@@ -66,6 +59,12 @@ const RecipeCard = (props) => {
             return true;
         }
 
+    const oneCard = el =>{
+           el.preventDefault();
+           //This will link to single
+           //props.history.push(`/card/${props.id}`);
+     }
+
     //This display description if present
         function descriptshow(){
             if(props.description===null){return <p>No Description</p>}
@@ -74,11 +73,11 @@ const RecipeCard = (props) => {
 //<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
 
     function EditButton(recipeUserId) {
-        // console.log(props);
-        // console.log('localStorage user_id = ' + localStorage.getItem('user_id'));
-        // console.log('recipe.user_id = ' + props.user_id);
-        if (props.recipe.user_id !== localStorage.getItem('user_id')) { // Set to === for this to only show edit for recipes the logged in user owns
-            return <button onClick={handleEdit}>Edit</button>;
+        console.log(props);
+        console.log('localStorage user_id = ' + localStorage.getItem('user_id'));
+        console.log('recipe.user_id = ' + props.user_id);
+        if (props.user_id !== localStorage.getItem('user_id')) { // Set to === for this to only show edit for recipes the logged in user owns
+            return <Button onClick={handleEdit}>Edit</Button>;
         }
         return '';
     }        

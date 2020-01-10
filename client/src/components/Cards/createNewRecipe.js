@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import RecipeCard from './recipeCard';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import styled from 'styled-components';
+import Button from '../FormInputs/Button';
+import Select from '../FormInputs/Select';
+import TextArea from '../FormInputs/TextArea';
+import Input from '../FormInputs/Input';
 //I still need to add input validation and axios call
 
 //it will take a user id which will be passed in props
@@ -11,6 +16,35 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 // description: "description,
 // ingredients: "ingredients" (required),
 // instructions: "instructions" (required) }
+
+const defaultStyling = `
+font-family: 'Quicksand', sans-serif;
+font-size: 12px;
+padding: 10px;
+background: papayawhip;
+border: none;
+display: flex;
+flex-direction: column;
+align-content: center;
+background-color: white;
+border: black 1px solid;
+width: 15rem;
+margin: 8px;
+border-radius: 5px;
+color:black;
+`
+const Wrapper =styled.div`
+  display:flex;
+  flex-flow: column  wrap;
+  justify-content:center;
+  align-content:center;
+`
+
+
+
+
+
+
 const CreateNewRecipe = (props) => {
 
     console.log(props)
@@ -97,10 +131,10 @@ const CreateNewRecipe = (props) => {
     }
 
     return(
-        <>
+        <Wrapper>
         <form onSubmit={submitForm}>
             <label htmlFor='type'>Type:</label>
-            <select
+            <Select
             id="type"
             name="type"
             onChange={handleChanges}
@@ -110,9 +144,9 @@ const CreateNewRecipe = (props) => {
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
                 <option value="snack">Snack</option>
-            </select>
+            </Select>
             <label htmlFor='title'>Title:</label>
-            <input
+            <Input
             name='title'
             type='text'
             id='title'
@@ -126,7 +160,7 @@ const CreateNewRecipe = (props) => {
             />
             {/*Leaving off image url until stretch time */}
             <label htmlFor='description'>Description:</label>
-            <textarea
+            <TextArea
             name='description'
             type='text'
             id='description'
@@ -137,7 +171,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.description}
             />
             <label htmlFor='ingredients'> Ingredients:</label>
-            <textarea
+            <TextArea
             name='ingredients'
             type='text'
             id='ingredients'
@@ -148,7 +182,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.ingredients}
             />
             <label htmlFor='instructions'>Instructions:</label>
-            <textarea
+            <TextArea
             name='instructions'
             type='text'
             id='instructions'
@@ -158,12 +192,12 @@ const CreateNewRecipe = (props) => {
             maxLength="500"
             value={recipe.instructions}
             />
-            <button type="submit">Submit</button>
-            <button onClick={deleteRecipe}>Delete</button>
+            <Button type="submit">Submit</Button>
+            <Button onClick={deleteRecipe}>Delete</Button>
 
         </form>
         <RecipeCard recipe={recipe}/>
-        </>
+        </Wrapper>
     )
 }
 

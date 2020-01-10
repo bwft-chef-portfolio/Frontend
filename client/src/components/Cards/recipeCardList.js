@@ -1,5 +1,6 @@
 import React from 'react';
 import RecipeCard from './recipeCard';
+import SearchForm from './SearchForm'
 import styled from 'styled-components';
 
 //styleing will go here
@@ -17,6 +18,8 @@ function RecipeCardList(props) {
        {props.recipes.map(recipe => (
          <RecipeCard key={recipe.id} recipe={recipe}/>
       ))}
+        
+       {/*props.recipes.map(recipe => (RecipeCard(recipe)))*/}
     </RecipeList>
   );
 }
