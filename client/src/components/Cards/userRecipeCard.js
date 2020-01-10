@@ -138,7 +138,7 @@ const UserRecipeCard = (props) => {
                 <p>Instructions: {props.recipe.instructions}</p>
             </div>     
             <button onClick={handleOpen}>Edit</button>
-            <button onClick={() => props.deleteRecipe(props.recipe.id)}>Delete</button>
+            <button onClick={() => props.deleteRecipe(props.recipe.id) & props.history.push(`/recipes-list`)}>Delete</button>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"

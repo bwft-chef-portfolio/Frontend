@@ -105,13 +105,14 @@ const CreateNewRecipe = (props) => {
     
     const submitForm = e => {
         e.preventDefault();
-        props.history.push(`/user-recipes-list`)
+        
 
         // No recipe ID, so we create a new recipe
             axiosWithAuth()
             .post('/recipes', recipe)
             .then(res => {
                 console.log(res)
+                props.history.push(`/user-recipes-list`)
             })
             .catch(err => {
                 console.log(err)
@@ -200,7 +201,7 @@ const CreateNewRecipe = (props) => {
             value={recipe.instructions}
             />
             <Button type="submit">Submit</Button>
-            <Button onClick={deleteRecipe}>Delete</Button>
+            {/* <button onClick={deleteRecipe}/> */}
 
         </form>
         <RecipeCard recipe={recipe}/>
