@@ -26,7 +26,7 @@ font-family: 'Quicksand', sans-serif;
 `
 
 export default function SearchForm(props) {
-  const [items, setItems] = useState(props);
+  const [items, setItems] = useState(props.recipe);
     const [query, setQuery] =useState('');
     useEffect(()=>{
         console.log('Your props are:');
