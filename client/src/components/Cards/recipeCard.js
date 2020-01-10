@@ -68,8 +68,8 @@ const RecipeCard = (props) => {
 
     //This display description if present
         function descriptshow(){
-            if(props.description===null){return <p>No Description</p>}
-            else{return <p>Description: {props.description}</p>}
+            if(props.recipe.description===null){return <p>No Description</p>}
+            else{return <p>Description: {props.recipe.description}</p>}
         }
 //<img id='foodImg' src= {props.img_url} alt="Food" onError= 'imgError(this)'/>
 

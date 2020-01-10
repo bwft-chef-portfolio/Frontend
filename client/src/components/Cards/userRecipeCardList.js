@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import UserRecipeCard from './userRecipeCard';
 import styled from 'styled-components';
 import {axiosWithAuth} from '../../utils/axiosWithAuth';
+import {connect} from 'react-redux';
+import {deleteRecipe} from '../../actions/index';
 
 
 //styleing will go here
@@ -34,10 +36,16 @@ function UserRecipeCardList(props) {
   return (
     <RecipeList>
        {recipes.map(recipe => (
-         <UserRecipeCard key={recipe.id} recipe={recipe}/>
+         <UserRecipeCard key={recipe.id} recipe={recipe} deleteRecipe={props.deleteRecipe}/>
       ))}
     </RecipeList>
-  );
+  )
 }
 
-export default UserRecipeCardList;
+const mapStateToProps = state => {
+    return {
+        fetchingData: state.fetchingData
+    }
+}
+
+export default connect(mapStateToProps, { deleteRecipe })(UserRecipeCardList)

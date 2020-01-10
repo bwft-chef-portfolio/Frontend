@@ -66,6 +66,7 @@ const UserRecipeCard = (props) => {
     }
     const handleClose = () => {
         setOpen(false);
+        props.history.push(`/user-recipes-list`)
     }
 
 
@@ -87,7 +88,7 @@ const UserRecipeCard = (props) => {
    const handleEdit = e => {
     e.preventDefault();
     props.history.push(`/edit-recipe/${props.recipe.user_id}`);
-    console.log(props);
+    // console.log(props);
     // console.log(props)
   };
   
@@ -95,7 +96,7 @@ const UserRecipeCard = (props) => {
         function imgError(img){
             img.oneError = null;
             img.src = backUpImage;
-            console.log('Triggered Error');
+            // console.log('Triggered Error');
             return true;
         }
 
@@ -116,6 +117,12 @@ const UserRecipeCard = (props) => {
         return '';
     }        
 
+    const handleDelete = e => {
+        e.preventDefault();
+        props.deleteRecipe(props.recipe.id)
+        props.history.push('/user-recipe-list')
+    }
+
     return(
 
         <Card>
@@ -125,13 +132,13 @@ const UserRecipeCard = (props) => {
             {/*<img src={props.recipe.img} alt='Food Image' onError={(e)=>{console.log('Error Triggered'); e.target.onerror = null; e.target.src={backUpImage}}}/>*/}
             <img src={props.recipe.img_url}/>
             <div>
-                <h1>Chef: {props.recipe.username}</h1>
                 <p>Type: {props.recipe.type}</p>
                 {descriptshow()}
                 <p>Ingredients: {props.recipe.ingredients}</p>
                 <p>Instructions: {props.recipe.instructions}</p>
             </div>     
             <button onClick={handleOpen}>Edit</button>
+            <button onClick={() => props.deleteRecipe(props.recipe.id)}>Delete</button>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
@@ -140,7 +147,7 @@ const UserRecipeCard = (props) => {
                 className={classes.flex}
                 >   
                 <div className = {classes.modalBox}>
-                <EditRecipe {...props} recipe={props.recipe} title={props.recipe.title} img_url={props.recipe.img_url} type={props.recipe.type} description={props.recipe.description} ingredients={props.recipe.ingredients} instructions={props.recipe.instructions}/>
+                <EditRecipe {...props} recipe={props.recipe}/>
                 </div>
             </Modal>
         </Card>
