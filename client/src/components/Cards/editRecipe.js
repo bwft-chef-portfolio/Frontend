@@ -72,7 +72,7 @@ const EditRecipe = (props) => {
         .put(`/recipes/${recipe.id}`, recipe)
         .then(res => {
             console.log(res)
-            
+            props.history.push('/recipes-list')
         })
         .catch(err => {
             console.log(err)
@@ -148,8 +148,8 @@ const EditRecipe = (props) => {
             maxLength="500"
             value={recipe.instructions}
             />
-            <button type="submit">Edit</button>
-            <button onClick={deleteRecipe}>Delete</button>
+            <button type="submit">Confirm</button>
+            {/* <button onClick={deleteRecipe}>Delete</button> */}
 
         </form>
         <RecipeCard recipe={recipe}/>
