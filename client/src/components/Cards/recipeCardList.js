@@ -15,7 +15,10 @@ function RecipeCardList(props) {
 
   return (
     <RecipeList>
-        {SearchForm(props.recipes)}
+       {props.recipes.map(recipe => (
+         <RecipeCard key={recipe.id} recipe={recipe}/>
+      ))}
+        
        {/*props.recipes.map(recipe => (RecipeCard(recipe)))*/}
     </RecipeList>
   );

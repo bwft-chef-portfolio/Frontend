@@ -24,6 +24,9 @@ const NavLinks =styled.nav`
     }   
 `
 // background: #333333;
+
+
+
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
@@ -40,8 +43,11 @@ class NavBar extends React.Component {
                     </div>
                     <NavLinks>
                         <Link to='/recipes-list'>Recipes</Link>
+                        <Link to='/user-recipes-list'>My Recipes</Link>
+                        <Link to='/add-recipe-card'>Add Recipe</Link>
                         <Link to='/login'>Login</Link>
                         <Link to='/registration'>Registration</Link>
+                        
                     </NavLinks>
                 </nav>
             </div>
