@@ -42,6 +42,7 @@ class NavBar extends React.Component {
                         {/* <a href='#'>ChefPort</a> */}
                     </div>
                     <NavLinks>
+                        <a href='https://chefport.netlify.com/'>Home</a>
                         <Link to='/recipes-list'>Recipes</Link>
                         <Link to='/user-recipes-list'>My Recipes</Link>
                         <Link to='/add-recipe-card'>Add Recipe</Link>
