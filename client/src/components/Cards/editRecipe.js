@@ -18,7 +18,7 @@ import {editRecipe} from '../../actions/index';
 
 const EditRecipe = (props) => { 
 
-    console.log(props)
+    // console.log(props)
 
     const initialState = {
     
@@ -34,10 +34,7 @@ const EditRecipe = (props) => {
     const [recipe, setRecipe] = useState(initialState);
 
 
-    useEffect(() => {
-        setRecipe(props.recipe)
-        console.log('EDIT RECIPE PROPS', props);
-    }, [props.recipes, props.match.params.id]);
+
 
     const handleChanges = el => {
         // console.log([el.target.name])
@@ -45,7 +42,7 @@ const EditRecipe = (props) => {
         const value = el.target.name === 'type' ? el.target.value.toLowerCase() : el.target.value;
         setRecipe({
             ...recipe,
-            [el.target.name]:value
+            [el.target.name]:el.target.value
         })
     }
 
@@ -61,15 +58,21 @@ const EditRecipe = (props) => {
             console.log(err)
         })
     }
-    
+
+    useEffect(() => {
+        setRecipe(props.recipe)
+        console.log('EDIT RECIPE PROPS', props);
+    }, [props.recipes]);
+
     const submitForm = e => {
         e.preventDefault();
-        props.history.push(`/user-recipes-list`)
-
+        
+        console.log('EDIT TITLE', props.title)
         axiosWithAuth()
-        .put(`/recipes/${recipe.id}`, props.title, props.img_url, props.type, props.description, props.ingredients, props.instructions)
+        .put(`/recipes/${recipe.id}`, recipe)
         .then(res => {
             console.log(res)
+            
         })
         .catch(err => {
             console.log(err)
@@ -79,6 +82,13 @@ const EditRecipe = (props) => {
     return(
         <>
         <form onSubmit={submitForm}>
+            <label htmlFor='type'>Image:</label>
+            <input 
+            name='img_url'
+            type='text'
+            onChange={handleChanges}
+            value={recipe.img_url}
+            />
             <label htmlFor='type'>Type:</label>
             <select
             id="type"
@@ -155,9 +165,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default withRouter(
-    connect(
-        mapStateToProps, 
-        {editRecipe}
-    )(EditRecipe)
-) 
+export default EditRecipe

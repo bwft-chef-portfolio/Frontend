@@ -133,6 +133,13 @@ const CreateNewRecipe = (props) => {
     return(
         <Wrapper>
         <form onSubmit={submitForm}>
+            <label htmlFor='type'>Image:</label>
+            <input 
+            name='img_url'
+            type='text'
+            onChange={handleChanges}
+            value={recipe.img_url}
+            />
             <label htmlFor='type'>Type:</label>
             <Select
             id="type"
