@@ -42,12 +42,12 @@ const useStyles = makeStyles(theme => ({
     card: {
       maxWidth: 345,
       textAlign: "center",
+      position: 'variable'
     },
     media: {
       height: 140,
     },
     modalBox: {
-      position: 'absolute',
       width: 600,
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
